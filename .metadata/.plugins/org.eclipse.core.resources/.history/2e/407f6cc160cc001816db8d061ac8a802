@@ -1,0 +1,5 @@
+package com.techprimers.security.springsecurityauthserver.config;
+
+public class ApplicationConfig {
+
+}

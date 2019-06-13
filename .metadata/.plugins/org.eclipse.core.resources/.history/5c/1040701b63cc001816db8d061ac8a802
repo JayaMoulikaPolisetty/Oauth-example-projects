@@ -1,0 +1,14 @@
+package com.techprimers.security.repository;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.techprimers.security.models.User;
+
+public interface UsersRepository extends JpaRepository<User,Integer> {
+	
+	Optional<User> findByName(String username);
+
+
+}

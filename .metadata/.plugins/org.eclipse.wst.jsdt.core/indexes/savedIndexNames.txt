@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+C:\oauthexamples\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3873373798.index
+2441035318.index
+3764764519.index
+260553179.index
+832947968.index
+2426018059.index
+262142283.index

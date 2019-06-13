@@ -1,0 +1,5 @@
+package com.jaya.config;
+
+public class ApplicationConfig {
+
+}

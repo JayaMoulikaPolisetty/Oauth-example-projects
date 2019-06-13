@@ -1,0 +1,25 @@
+package com.techprimers.security.springsecurityauthserver.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import com.techprimers.security.services.CustomUserDetailsService;
+
+@Configuration
+public class ApplicationConfig {
+	
+	@Bean
+	public UserDetailsService userDetailsService()
+	{
+		return new CustomUserDetailsService();
+	}
+
+	@Bean
+	public JpaRepository<User, Integer> userRepo()
+	{
+		return new JpaRepository<User, Integer>() {
+		};
+	}
+}

@@ -1,0 +1,48 @@
+package com.jaya.springsc.security.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.jaya.springsc.models.CustomUserDetails;
+import com.jaya.springsc.services.SCUserDetailsService;
+
+public class CustomAuthenticationProvider implements AuthenticationProvider{
+
+	@Autowired
+	private SCUserDetailsService userDetailsService;
+	
+	@Override
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		
+		String name =  authentication.getName();
+		String password = authentication.getCredentials().toString();
+		
+		CustomUserDetails user = (CustomUserDetails) userDetailsService.loadUserByUsername(name);
+		
+		if(user == null || !user.getUsername().equals(name))
+		{
+			throw new BadCredentialsException("User not found");
+		}
+		
+		if(!user.getPassword().equals(password))
+		{
+			throw new BadCredentialsException("Password mismatch");
+		}
+		
+		return new UsernamePasswordAuthenticationToken(name,password, authentication.getAuthorities());
+		
+		
+	}
+
+	@Override
+	public boolean supports(Class<?> authentication) {
+		return authentication.equals(UsernamePasswordAuthenticationToken.class);
+	}
+
+}
